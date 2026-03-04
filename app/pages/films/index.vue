@@ -13,6 +13,8 @@ const filmsWithUrls = films.map((film) => ({
             <div>
                 <h2 class="font-bold text-2xl">{{ film.titre }}</h2>
                 <img :src="film.afficheUrl" :alt="`Affiche de ${film.titre}`" class="w-64 h-auto">
+                <NuxtLink :to="`/films/${film.id}`">Voir le film</NuxtLink>
+
             </div>
         </li>
     </ul>
