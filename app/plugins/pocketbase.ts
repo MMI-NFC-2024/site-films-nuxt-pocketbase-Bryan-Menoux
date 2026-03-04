@@ -31,7 +31,13 @@ export default defineNuxtPlugin(async () => {
       pb.authStore.clear();
   }
 
+  // Valeur réactive refletant l'utilisateur
+  const user = ref<UsersResponse | null>(null)
+  pb.authStore.onChange((token, record) => {
+    user.value = record as UsersResponse || null
+  })
+
   return {
-    provide: { pb }
+    provide: { pb, user }
   }
 });
