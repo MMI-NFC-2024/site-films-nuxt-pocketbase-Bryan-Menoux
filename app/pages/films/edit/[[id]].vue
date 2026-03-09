@@ -37,13 +37,20 @@ async function envoyer(){
         router.push({name: "films-id", params: {id: filmAjoute.id}})
     }
 }
+function createObjectURL(fichier: File) {
+    return globalThis.URL.createObjectURL(fichier)
+}
 </script>
 <template>
     <form @submit.prevent="envoyer">
         <div v-if="film.affiche" >
-            <ImgPb :record="film" :filename="film.affiche" />
+            <ImgPb v-if="typeof film.affiche === 'string'" :record="film" :filename="film.affiche" />
+            <img v-else :src="createObjectURL(film.affiche)" />
             <button @click.prevent="film.affiche = undefined">Supprimer</button>
         </div>
+        <label v-else >Affiche
+            <input type="file" @change="film.affiche = ($event.target as HTMLInputElement).files?.[0]" />            
+        </label>
         <label>Titre
             <input type="text" v-model="film.titre" />
         </label>
