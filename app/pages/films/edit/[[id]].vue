@@ -7,12 +7,13 @@ const router = useRouter()
 
 const id = route.params.id as string
 
-const film = ref<Partial<FilmsRecord>>({
+const film = ref<Omit<Partial<FilmsRecord>, 'affiche'> & { affiche?: File | string }>({
   titre: "",
   duree_min: undefined,
   genres: [],
   synopsis: "",
-  date_sortie: ""
+  date_sortie: "",
+  affiche: undefined
 })
 
 if (id) {
