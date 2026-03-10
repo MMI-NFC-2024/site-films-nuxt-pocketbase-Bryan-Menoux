@@ -10,6 +10,6 @@ const user = nuxtApp.$user
 </script>
 
 <template>
-    <button @click="loginWithGithub">Se connecter via github</button>
+    <button v-if="!user" @click="loginWithGithub">Se connecter via github</button>
     <button v-if="user" @click="nuxtApp.$pb.authStore.clear()">Se déconnecter {{ user?.name || user?.email }}</button>
 </template>
